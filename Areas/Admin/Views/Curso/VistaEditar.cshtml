@@ -1,0 +1,96 @@
+﻿@using SistemaDeCursos.Areas.Admin.ViewModels
+@model EditarCursoViewModel
+
+<div class="container w-50 card mt-5">
+	<form method="post" asp-action="Editar" enctype="multipart/form-data" class="form mt-3">
+		<input type="hidden" asp-for="@Model.Id"></input>
+
+		<label clas="form-label mt-1" asp-for="Titulo">Título:</label>
+		<input class="form-control" asp-for="Titulo"></input>
+		<span asp-validation-for="Titulo" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Descripcion">Descripcion:</label>
+		<input class="form-control" asp-for="Descripcion"></input>
+		<span asp-validation-for="Descripcion" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Precio">Precio:</label>
+		<input class="form-control" asp-for="Precio"></input>
+		<span asp-validation-for="Precio" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Estado">Estado:</label>
+		<select asp-for="Estado" class="form-control form-control-sm estado-select me-2">
+			<option value="1">Activa</option>
+			<option value="2">Revocada</option>
+			<option value="2">Suspendida</option>
+		</select>
+		<span asp-validation-for="Estado" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="InstructorId">Instructor:</label>
+		<select asp-for="InstructorId" class="form-control form-control-sm estado-select me-2">
+			@foreach(var i in Model.Instructores){
+				<option value="@i.Id">@i.Nombre</option>
+			}
+		</select>
+		<span asp-validation-for="InstructorId" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="CategoriaId">Categoria:</label>
+		<select asp-for="CategoriaId" class="form-control form-control-sm estado-select me-2">
+			@foreach (var c in Model.Categorias)
+			{
+				<option value="@c.Id">@c.Nombre</option>
+			}
+		</select>
+		<span asp-validation-for="CategoriaId" class="text-danger d-block"></span>
+
+		<div class="mb-3">
+
+			@if (!string.IsNullOrEmpty(Model.ImagenUrl))
+			{
+				<div class="mb-2 text-center">
+					<img id="previewImagen"
+						 src="@Model.ImagenUrl"
+						 class="img-fluid rounded shadow-sm"
+						 style="max-height: 250px; object-fit: cover;" />
+				</div>
+			}
+			else
+			{
+				<img id="previewImagen"
+					 class="img-fluid rounded shadow-sm d-none"
+					 style="max-height: 250px; object-fit: cover;" />
+			}
+
+			<label class="form-label">Cambiar imagen:</label>
+			<input type="file"
+				   asp-for="Archivo"
+				   class="form-control"
+				   accept="image/*"
+				   onchange="previewFile(event)" />
+
+		</div>
+
+		<div class="d-flex g-2 mt-3 mb-3">
+			<input class="btn btn-primary" type="submit" value="Guardar" />
+			<a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+		</div>
+
+	</form>
+</div>
+
+<script>
+	function previewFile(event) {
+		const input = event.target;
+		const preview = document.getElementById('previewImagen');
+
+		if (input.files && input.files[0]) {
+			const reader = new FileReader();
+
+			reader.onload = function (e) {
+				preview.src = e.target.result;
+				preview.classList.remove("d-none");
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+</script>

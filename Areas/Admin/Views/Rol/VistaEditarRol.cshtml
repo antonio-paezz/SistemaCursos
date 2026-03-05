@@ -1,0 +1,21 @@
+﻿@model SistemaDeCursos.Areas.Admin.ViewModels.RolViewModel;
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="d-flex justify-content-center mt-5">
+
+	<form asp-action="Editar" method="post">
+		<input asp-for="IdRol" type="hidden" />
+
+		<div>
+			<label asp-for="Nombre" class="form-label">Nombre: </label>
+			<input asp-for="Nombre" class="form-control" placeholder="Ingrese nombre de categoria..." />
+			<span asp-validation-for="Nombre" class="text-danger d-block"></span>
+
+		</div>
+
+		<input type="submit" value="Guardar" class="btn btn-primary mt-2"></input>
+
+	</form>
+
+</div>

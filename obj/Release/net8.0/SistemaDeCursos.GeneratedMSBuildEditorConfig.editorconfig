@@ -1,0 +1,287 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SistemaDeCursos
+build_property.RootNamespace = SistemaDeCursos
+build_property.ProjectDir = C:\Users\antop\source\repos\SistemaDeCursos\SistemaDeCursos\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\antop\source\repos\SistemaDeCursos\SistemaDeCursos
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Categoria/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmlhXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Categoria/VistaCrear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmlhXFZpc3RhQ3JlYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Categoria/VistaEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmlhXFZpc3RhRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Curso/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3Vyc29cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Curso/VistaCrear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3Vyc29cVmlzdGFDcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Curso/VistaEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ3Vyc29cVmlzdGFFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Inscripcion/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5zY3JpcGNpb25cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Rol/a_ListaUsuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sXGFfTGlzdGFVc3Vhcmlvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Rol/UsuariosPorRol.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sXFVzdWFyaW9zUG9yUm9sLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Rol/VistaCrearRol.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sXFZpc3RhQ3JlYXJSb2wuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Rol/VistaEditarRol.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sXFZpc3RhRWRpdGFyUm9sLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Rol/VistaListaRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sXFZpc3RhTGlzdGFSb2xlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Rol/_ListaUsuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sXF9MaXN0YVVzdWFyaW9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Rol/_TablaRol.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sXF9UYWJsYVJvbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_Alerts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BbGVydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_Navbar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9OYXZiYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_Sidebar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9TaWRlYmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_Toastr.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9Ub2FzdHIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_ValidationSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Shared/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9WaWV3SW1wb3J0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Usuario/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Usuario/RolesDeUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXN1YXJpb1xSb2xlc0RlVXN1YXJpby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Usuario/VistaAgregar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXN1YXJpb1xWaXN0YUFncmVnYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Usuario/VistaEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXN1YXJpb1xWaXN0YUVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Usuario/_ListaUsuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXN1YXJpb1xfTGlzdGFVc3Vhcmlvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/Usuario/_ModalBuscarUsuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXN1YXJpb1xfTW9kYWxCdXNjYXJVc3Vhcmlvcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Admin/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Carrito/Carrito.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2Fycml0b1xDYXJyaXRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Contenido/VistaAgregar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVuaWRvXFZpc3RhQWdyZWdhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/CursosDeUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cQ3Vyc29zRGVVc3VhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/Detalle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cRGV0YWxsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/Lista.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cTGlzdGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/VerCurso.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cVmVyQ3Vyc28uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/VistaCrear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cVmlzdGFDcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/VistaEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cVmlzdGFFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/_LeccionPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cX0xlY2Npb25QYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Curso/_ResenasCursoPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3Vyc29cX1Jlc2VuYXNDdXJzb1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Leccion/Detalle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVjY2lvblxEZXRhbGxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Leccion/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVjY2lvblxFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Leccion/VerLeccion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVjY2lvblxWZXJMZWNjaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Leccion/VistaCrear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVjY2lvblxWaXN0YUNyZWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Login/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQWNjZXNzRGVuaWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Login/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Perfil/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZmlsXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Registration/Registration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXFJlZ2lzdHJhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Rol/Lista.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXExpc3RhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Rol/VistaCrear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXFZpc3RhQ3JlYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/Components/Categorias/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2F0ZWdvcmlhc1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/_Alerts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BbGVydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/_Toastr.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ub2FzdHIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/_ValidationErrors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uRXJyb3JzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/_ValidationSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-pzkoyec0ev

@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model List<IdentityRole>
+
+<table class="table table-bordered table-hover">
+
+	<thead class="table-dark">
+		<tr>
+			<th scope="col" style="width:50%">Nombre</th>
+			<th scope="col" style="width:50%">Operaciones</th>
+		</tr>
+	</thead>
+	<tbody class="table-active">
+		@foreach (var r in Model)
+		{
+			<tr>
+				<td>@r.Name</td>
+				<td>
+					<div class="d-flex justify-content-around">
+						<a asp-controller="Rol" asp-action="VistaEditarRol" asp-route-id="@r.Id" class="btn btn-sm btn-warning">Editar</a>
+						<button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+								data-target="#confirmarEliminarRolModal"
+								onclick="setEliminarRolAction('@Url.Action("Eliminar", "Rol", new {area="Admin", id = r.Id })')">
+							<i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+						</button>
+						<a asp-controller="Rol" asp-action="UsuariosPorRol" asp-route-rolName="@r.Name" class="btn btn-sm btn-secondary">Usuarios</a>
+					</div>
+				</td>
+			</tr>
+		}
+
+	</tbody>
+
+</table>
+
+
+
+

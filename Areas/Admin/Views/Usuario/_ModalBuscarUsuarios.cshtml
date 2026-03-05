@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<ApplicationUser>
+@{
+    var modo = ViewBag.Modo ?? "operaciones"; // valor por defecto
+}
+
+<div class="modal fade" id="modalUsuarios" tabindex="-1" data-modo="@modo" data-rol="@ViewBag.RolName">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Usuarios</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                @if (modo == "seleccion")
+                {
+                    <button id="btnAsignarRol" class="btn btn-primary mb-3">Asignar Rol</button>
+                }
+                <input type="text" id="txtBuscar" class="form-control mb-3" placeholder="Buscar por nombre o email..." />
+                <div id="listaUsuarios">
+                    @await Html.PartialAsync("_ListaUsuarios", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // array global que recuerda las selecciones durante la sesión del modal
+
+    // Delegated listener para checkboxes (funciona para elementos dinámicos)
+    $(document).on('change', '.chk-usuario', function () {
+        const userId = String($(this).val());
+        if ($(this).is(':checked')) {
+            if (!seleccionados.includes(userId)) seleccionados.push(userId);
+        } else {
+            seleccionados = seleccionados.filter(id => id !== userId);
+        }
+        // console.log('seleccionados:', seleccionados);
+    });
+
+    $(document).ready(function () {
+        // Búsqueda (podés agregar debounce si querés)
+        $('#txtBuscar').on('keyup', function () {
+            const filtro = $(this).val();
+
+            const modo = $('#modalUsuarios').data('modo') || '@modo';
+            $.get('/Admin/Usuario/Buscar', { filtro: filtro, modo: modo }, function (data) {
+                const lista = $('#listaUsuarios');
+                lista.empty();
+
+                $('#listaUsuarios').html(data)
+
+                //recuerda los checkboxes seleccionados
+                $('#listaUsuarios .chk-usuario').each(function () {
+                    const id = String($(this).val());
+                    if (seleccionados.includes(id)) {
+                        $(this).prop('checked', true);
+                    }
+                });
+            });
+        });
+    });
+
+    // Botón asistir rol: usa el array global 'seleccionados' (no lo redeclaramos)
+    $('#btnAsignarRol').click(function () {
+        if (seleccionados.length === 0) {
+            alert("Seleccioná al menos un usuario.");
+            return;
+        }
+
+        // Obtenemos el roleName guardado en el modal
+        const roleName = $('#modalUsuarios').data('rol') || "@ViewBag.RoleName" || "";
+
+        // Enviar el array global (ya contiene selecciones hechas aunque no estén visibles)
+        $.ajax({
+            url: '/Admin/Rol/AsignarRol',
+            type: 'POST',
+            traditional: true,
+            data: { ids: seleccionados, rol: roleName },
+            success: function (resp) {
+                alert("Rol asignado correctamente");
+                // si querés: cerrar modal y limpiar selección
+                $('#modalUsuarios').on('hidden.bs.modal', function () {
+                    // Esto se ejecuta SOLO cuando el modal se haya cerrado completamente
+                    $.get('/Admin/Rol/ListaUsuariosPorRol', { rolName: roleName }, function (html) {
+                        $('#contenedorUsuarios').html(html);
+                    });
+                })
+                $('#modalUsuarios').modal('hide');
+                seleccionados = [];
+            },
+            error: function () {
+                alert("Ocurrió un error al asignar roles");
+            }
+        });
+    });
+</script>

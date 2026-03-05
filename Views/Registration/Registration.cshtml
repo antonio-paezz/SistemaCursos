@@ -1,0 +1,39 @@
+﻿@model SistemaDeCursos.ViewModels.RegistrationViewModel
+
+<div class="card w-35 container mx-auto">
+	<div class="w-75 h-75 container mx-auto">
+		<img src="~/img/Logo-conectaPro.png" alt="logo" class="img-fluid"/>
+	</div>
+	<form method="post" asp-action="Registrarse" class="form">
+		<partial name="_ValidationErrors" />
+
+		<label asp-for="Nombre" class="form-label">Nombre: </label>	
+		<input asp-for="Nombre" placeholder="Ingrese su nombre" class="form-control mb-3"></input>
+	
+		<label asp-for="Apellido" class="form-label">Apellido:</label>
+		<input asp-for="Apellido" placeholder="Ingrese su apellido" class="form-control mb-3"></input>
+
+		<label asp-for="NombreDeUsuario" class="form-label">Nombre de Usuario: </label>
+		<input asp-for="NombreDeUsuario" placeholder="Ingrese su nombre de usuario" class="form-control mb-3"></input>
+
+		<label asp-for="Email" class="form-label">Email: </label>
+		<input asp-for="Email" placeholder="Ingrese su Email" class="form-control mb-3"></input>
+
+		<label asp-for="Contraseña" class="form-label">Contraseñia</label>
+		<input asp-for="Contraseña" type="password" placeholder="Ingrese su contraseña" class="form-control mb-3"></input>
+
+		<label asp-for="Pais" class="form.label">País</label>
+		<input asp-for="Pais" placeholder="Ingrese su país" class="form-control mb-3"></input>
+
+
+		<label asp-for="Provincia" class="form-label">Provincia</label>
+		<input asp-for="Provincia" placeholder="Ingrese su provincia" class="form-control mb-3"></input>
+
+		<label asp-for="Ciudad" class="form-label">Ciudad:</label>
+		<input asp-for="Ciudad" placeholder="Ingrese su ciudad" class="form-control mb-3"></input>
+
+		<input type="submit" value="Registrarse" class="btn btn-primary w-100 mb-3"></input>
+	</form>
+	<a asp-action="Login" asp-controller="Login" class="btn btn-secondary w-100 mb-3">Iniciar Sesion</a>
+
+</div>

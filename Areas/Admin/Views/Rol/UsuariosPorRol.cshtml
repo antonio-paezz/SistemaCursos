@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model SistemaDeCursos.Areas.Admin.ViewModels.RolViewModel;
+
+
+
+<div class="container w-75">
+	<button type="button" class="btn btn-primary mt-5" onclick="abrirModalUsuarios('seleccion','@Model.Nombre')">Buscar Usuarios</button>
+</div>
+<div id="contenedorModal"></div>
+<div class="container w-75 d-flex justify-content-center mt-2 " id="contenedorUsuarios">
+	@await Html.PartialAsync("_ListaUsuarios", Model)
+</div>
+
+
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white">
+				<h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+				¿Estás seguro de que deseas eliminar esta especialidad?
+			</div>
+			<div class="modal-footer">
+				<form id="formEliminar" method="post">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('#modalUsuarios').on('hidden.bs.modal', function () {
+				document.activeElement.blur(); // saca el foco de lo que haya quedado
+				$('body').focus(); // o mover el foco al body
+			});
+		});
+	</script>
+
+	<script>
+
+		var seleccionados = [];
+
+		function abrirModalUsuarios(modo, rolName) {
+			$.get('/Admin/Usuario/ModalBuscarUsuarios', { rolName: '@Model.Nombre', modo }, function (html) {
+				$('#contenedorModal').html(html);
+				$('#modalUsuarios').data('modo', modo);
+				$('#modalUsuarios').data('rol', rolName)
+				$('#modalUsuarios').modal('show');
+			});
+		}
+	</script>
+	<script>
+		function setEliminarAction(actionUrl) {
+			document.getElementById('formEliminar').action = actionUrl;
+		}
+	</script>
+}
+
+
+

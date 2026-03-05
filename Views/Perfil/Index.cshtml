@@ -1,0 +1,98 @@
+﻿@model SistemaDeCursos.ViewModels.PerfilViewModel
+
+<div class="container mt-4">
+    <h2>Mi Perfil</h2>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="@(string.IsNullOrEmpty(Model.FotoUrl)
+            ? "/img/default-perfil.png"
+            : Model.FotoUrl)"
+                 class="rounded-circle"
+                 style="width:140px;height:140px;object-fit:cover;" />
+
+            <form asp-action="SubirImagen" method="post" enctype="multipart/form-data">
+                <input type="file" asp-for="Foto" class="form-control mt-2" />
+
+                <button class="btn btn-primary mt-2 w-100">
+                    Guardar foto
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-8">
+            <form asp-action="Editar" method="post">
+                <div class="mb-2">
+                    <label>Nombre</label>
+                    <input asp-for="Nombre" class="form-control" />
+                </div>
+
+                <div class="mb-2">
+                    <label>Email</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+
+                <div class="mb-2">
+                    <label>Teléfono</label>
+                    <input asp-for="Telefono" class="form-control" />
+                </div>
+
+                <button class="btn btn-success">
+                    Actualizar datos
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- CAMBIO DE CONTRASEÑA -->
+    <h4>Cambiar contraseña</h4>
+
+    <form asp-action="CambiarPassword" method="post">
+        <div class="mb-2">
+            <label>Contraseña actual</label>
+            <input type="password" asp-for="ContraseñaActual" class="form-control" required />
+        </div>
+
+        <div class="mb-2">
+            <label>Nueva contraseña</label>
+            <input type="password" asp-for="NuevaContraseña" class="form-control" required />
+        </div>
+
+        <div class="mb-2">
+            <label>Confirmar nueva contraseña</label>
+            <input type="password" asp-for="ConfirmarContraseña" class="form-control" required />
+        </div>
+
+        <button class="btn btn-warning">
+            Cambiar contraseña
+        </button>
+    </form>
+
+    <hr />
+
+    
+    <h4>Actividad reciente</h4>
+    @if (Model.Logs != null && Model.Logs.Any())
+    {
+        <div class="list-group">
+            @foreach (var log in Model.Logs)
+            {
+                <div class="list-group-item">
+                    <strong>@log.Fecha.ToString("dd/MM/yyyy HH:mm")</strong>
+                    <p class="mb-0">@log.Accion</p>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">No hay actividad reciente.</p>
+    }
+</div>

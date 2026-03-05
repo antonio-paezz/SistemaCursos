@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IdentityRole>
+
+<h2 class="titulo text-center">Roles</h2>
+<a asp-action="VistaCrear" class="btn boton-verde">Agregar Rol</a>
+<div class="card container mx-auto w-50">
+	@foreach(var rol in Model)
+	{
+		<p>@rol.Name</p>
+	}
+</div>

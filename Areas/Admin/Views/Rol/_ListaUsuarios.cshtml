@@ -1,0 +1,48 @@
+﻿@model SistemaDeCursos.Areas.Admin.ViewModels.RolViewModel;
+
+<table class="table table-bordered table-hover">
+	<thead class="table-dark">
+		<tr>
+			<th>Nombre</th>
+			<th>Email</th>
+			<th>Operaciones</th>
+		</tr>
+	</thead>
+	<tbody class="table-light">
+		@foreach (var u in Model.Usuarios)
+		{
+			<tr>
+				<td>@u.UserName</td>
+				<td>@u.Email</td>
+				<td>
+					<button type="button" class="btn btn-danger" data-toggle="modal"
+							data-target="#confirmarEliminarModal"
+							onclick="setEliminarAction('@Url.Action("QuitarRol", "Rol", new {area="Admin", userId = u.Id, rolName = Model.Nombre })')">
+						<i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+					</button>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white">
+				<h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+				¿Estás seguro de que deseas quitar el rol @Model.Nombre a este usuario?
+			</div>
+			<div class="modal-footer">
+				<form id="formEliminar" method="post">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

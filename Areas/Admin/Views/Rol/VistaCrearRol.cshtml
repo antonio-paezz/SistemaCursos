@@ -1,0 +1,14 @@
+﻿@model SistemaDeCursos.Areas.Admin.ViewModels.RolViewModel;
+
+<div class="d-flex justify-content-center mt-5">
+	<form asp-action="Crear" method="post">
+		<partial name="_ValidationErrors" />
+		<div>
+			<label asp-for="Nombre" class="form-label">Nombre: </label>
+			<input asp-for="Nombre" placeholder="Ingrese nombre del rol" class="form-control"></input>
+			<span asp-validation-for="Nombre" class="text-danger d-block"></span>
+		</div>
+
+		<input type="submit" value="Agregar" class="btn btn-primary mt-2"></input>
+	</form>
+</div>

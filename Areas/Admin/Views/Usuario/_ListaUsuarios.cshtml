@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<ApplicationUser>
+@{
+    var modo = ViewBag.Modo ?? "operaciones"; // valor por defecto
+
+}
+
+<table class="table table-hover table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            @if (modo == "seleccion")
+            {
+                <th>Seleccionar</th>
+            }
+            @if (modo == "operaciones")
+            {
+                <th>Operaciones</th>
+            }
+        </tr>
+    </thead>
+    <tbody id="listaUsuarios" class="table-active">
+        @if (Model == null || !Model.Any())
+        {
+            <tr><td colspan="3">No se encontraron usuarios</td></tr>
+        }
+
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.UserName</td>
+                <td>@u.Email</td>
+
+                @if (modo == "seleccion")
+                {
+                    <td>
+                        <input type="checkbox" class="chk-usuario form-check" value="@u.Id" />
+                    </td>
+                }
+
+                @if (modo == "operaciones")
+                {
+                    <td>
+                        @{
+                            var bloqueado = u.LockoutEnd.HasValue && u.LockoutEnd > DateTimeOffset.UtcNow;
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="d-flex justify-content-around">
+                                <a asp-controller="Usuario" asp-action="VistaEditar" asp-route-id="@u.Id" class="btn btn-sm btn-warning">Editar</a>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                        data-target="#confirmarEliminarModal"
+                                        onclick="setEliminarAction('@Url.Action("Eliminar", "Usuario", new { id = u.Id })')">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+                                </button>
+                                <a asp-controller="Usuario" asp-action="RolesDeusuario" asp-route-userId="@u.Id" class="btn btn-sm btn-secondary">Ver roles</a>
+                            </div>
+                        }
+
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav>
+    <ul class="pagination">
+
+        @for (int i = 1; i <= ViewBag.TotalPaginas; i++)
+        {
+            <li class="page-item @(i == ViewBag.PaginaActual ? "active" : "")">
+                <a class="page-link" href="?pagina=@i">@i</a>
+            </li>
+        }
+
+    </ul>
+</nav>
+

@@ -1,0 +1,116 @@
+﻿@using SistemaDeCursos.Models
+@model List<Inscripcion>
+
+<div class="m-auto mb-5 w-75">
+	<table id="tablaInscripciones" class="table table-bordered table-striped" style="width:100%">
+		
+		<thead>
+			<tr>
+				<th>Fecha</th>
+				<th>Estado</th>
+				<th>Usuario</th>
+				<th>Curso</th>
+				<th>Operaciones</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.FechaInscripcion</td>
+					<td>@item.Estado</td>
+					<td>@item.Usuario.Email</td>
+					<td>@item.Curso.Titulo</td>
+					<td class="d-flex">
+						<select class="form-control form-control-sm estado-select me-2"
+								data-id="@item.Id">
+							<option value="1" selected="@(item.Estado == 1)">Activa</option>
+							<option value="2" selected="@(item.Estado == 2)">Revocada</option>
+							<option value="3" selected="@(item.Estado == 3)">Suspendida</option>
+						</select>
+						<button class="btn btn-primary btn-sm guardar-estado"
+								data-id="@item.Id">
+							Guardar
+						</button>
+					</td>
+					
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</div>
+
+<div class="modal fade" id="confirmarEliminarRolModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white">
+				<h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+				¿Estás seguro de que deseas eliminar esta inscripcion?
+			</div>
+			<div class="modal-footer">
+				<form id="formEliminar" method="post">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+
+	<script>
+		function setEliminarRolAction(actionUrl) {
+			console.log(actionUrl);
+			document.getElementById('formEliminar').action = actionUrl;
+		}
+
+
+		$(function () {
+			$('#tablaInscripciones').DataTable({
+				autoWidth: false,
+				responsive: false,
+				language: {
+					url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+				}
+			});
+		});
+	</script>
+
+	<script>
+		$(document).on("click", ".guardar-estado", function () {
+
+			var id = $(this).data("id");
+
+			var estado = $(this)
+				.closest("tr")
+				.find(".estado-select")
+				.val();
+
+			$.ajax({
+				url: '/Admin/Inscripcion/CambiarEstado',
+				type: 'POST',
+				data: {
+					id: id,
+					estado: estado
+				},
+				success: function (res) {
+					if (res.success) {
+						toastr.success(res.message);
+					} else {
+						toastr.error(res.message);
+					}
+				},
+				error: function () {
+					toastr.error("Ocurrió un error en el servidor");
+				}
+			});
+		});
+	</script>
+}

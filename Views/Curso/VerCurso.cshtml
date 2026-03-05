@@ -1,0 +1,293 @@
+﻿@model SistemaDeCursos.ViewModels.CursoViewModel;
+
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        <!-- VIDEO PRINCIPAL -->
+        <div class="col-lg-8 mb-3">
+
+            <div id="contenedor-video">
+                @await Html.PartialAsync("_LeccionPartial", Model.LeccionActual)
+            </div>
+
+            @await Html.PartialAsync("_ResenasCursoPartial", Model)
+
+            <hr class="my-4" />
+
+            <hr class="my-4" />
+
+            <div id="seccionResenas">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (!(ViewBag.YaCalifico ?? false))
+                    {
+                        <h5 class="mb-3">Calificar curso</h5>
+
+                        <form id="formCalificacion">
+
+                            <input type="hidden" name="CursoId" value="@Model.Id" />
+                            <input type="hidden" name="Puntuacion" id="Puntuacion" />
+
+                            <!-- Estrellas -->
+                            <div id="starRating" class="mb-3">
+                                <i class="bi bi-star fs-4" data-value="1"></i>
+                                <i class="bi bi-star fs-4" data-value="2"></i>
+                                <i class="bi bi-star fs-4" data-value="3"></i>
+                                <i class="bi bi-star fs-4" data-value="4"></i>
+                                <i class="bi bi-star fs-4" data-value="5"></i>
+                            </div>
+
+                            <!-- Comentario -->
+                            <textarea name="Comentario"
+                                      class="form-control mb-3"
+                                      placeholder="Escribí tu reseña (opcional)">
+                            </textarea>
+
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Enviar reseña
+                            </button>
+
+                        </form>
+
+                        <div id="mensajeCalificacion" class="mt-2"></div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            Ya calificaste este curso.
+                        </div>
+                    }
+                }
+                
+
+            </div>
+
+        </div>
+
+        <!-- LISTA DE LECCIONES -->
+        <div class="col-lg-4">
+
+            <div class="list-group">
+                @foreach (var l in Model.Lecciones)
+                {
+                    <a class="list-group-item list-group-item-action leccion-link" 
+                    data-id="@l.Id" 
+                    asp-action="VistaCurso" 
+                    asp-route-cursoId="@l.CursoId" 
+                    asp-route-leccionId="@l.Id">
+                        @l.Titulo
+                    </a>
+
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(".leccion-link").click(function (e) {
+            e.preventDefault();
+
+            var id = $(this).data("id");
+
+            $.get("/Curso/CargarLeccion/" + id, function (data) {
+                $("#contenedor-video").html(data);
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            inicializarEstrellas();
+            inicializarFormulario();
+
+        });
+
+        function inicializarEstrellas() {
+
+            const stars = document.querySelectorAll("#starRating i");
+            const input = document.getElementById("Puntuacion");
+
+            if (!stars.length || !input) return;
+
+            let selectedRating = 0;
+
+            stars.forEach(star => {
+
+                const value = star.getAttribute("data-value");
+
+                // Hover
+                star.addEventListener("mouseover", function () {
+                    pintarEstrellas(value);
+                });
+
+                star.addEventListener("mouseout", function () {
+                    pintarEstrellas(selectedRating);
+                });
+
+                star.addEventListener("click", function () {
+                    selectedRating = value;
+                    input.value = value;
+                    pintarEstrellas(value);
+                });
+
+            });
+
+            function pintarEstrellas(valor) {
+
+                stars.forEach(s => {
+
+                    if (s.getAttribute("data-value") <= valor) {
+                        s.classList.remove("bi-star");
+                        s.classList.add("bi-star-fill", "text-warning");
+                    } else {
+                        s.classList.remove("bi-star-fill", "text-warning");
+                        s.classList.add("bi-star");
+                    }
+
+                });
+
+            }
+
+        }
+
+        function inicializarFormulario() {
+
+            const form = document.getElementById("formCalificacion");
+            if (!form) return;
+
+            form.addEventListener("submit", function (e) {
+
+                e.preventDefault();
+
+                const formData = new FormData(form);
+
+                fetch('/Calificacion/Crear', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(err => {
+                                throw new Error(err.message || "Error en la solicitud");
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+
+                        document.getElementById("promedioCurso").innerText = data.promedio;
+                        document.getElementById("totalResenas").innerText =
+                            data.totalResenas + " reseñas";
+
+                        actualizarEstrellasPromedio(data.promedio);
+
+                        const nuevaResenaHTML = `
+                            <div class="card mb-3 shadow-sm" id="resena-${data.nuevaResena.id}">
+                                <div class="card-body">
+
+                                    <div class="d-flex justify-content-between">
+                                        <strong>${data.nuevaResena.usuario}</strong>
+                                        <small class="text-muted">
+                                            ${data.nuevaResena.fecha}
+                                        </small>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        ${generarEstrellasHTML(data.nuevaResena.puntuacion)}
+                                    </div>
+
+                                    ${data.nuevaResena.comentario
+                                                ? `<p class="mb-0">${data.nuevaResena.comentario}</p>`
+                                                : ''}
+
+                                    <button class="btn btn-sm btn-outline-primary btnEditar"
+                                        data-id="${data.nuevaResena.id}"
+                                        data-puntuacion="${data.nuevaResena.puntuacion}"
+                                        data-comentario="${data.nuevaResena.comentario ?? ''}">
+                                        Editar
+                                    </button>
+
+                                    <button class="btn btn-sm btn-outline-danger btnEliminar"
+                                        data-id="${data.nuevaResena.id}">
+                                        Eliminar
+                                    </button>
+
+                                </div>
+                            </div>
+                        `;
+
+                        document
+                            .getElementById("listaResenas")
+                            .insertAdjacentHTML("afterbegin", nuevaResenaHTML);
+
+                        form.reset();
+                        reiniciarEstrellasUI();
+                        document.getElementById("seccionResenas").innerHTML =
+                            `<div class="alert alert-info">Ya calificaste este curso.</div>`;
+                    })
+                    .catch(error => {
+                        document.getElementById("mensajeCalificacion").innerHTML =
+                            `<div class="alert alert-danger py-1">${error.message}</div>`;
+                    });
+
+            });
+
+        }
+
+        function reiniciarEstrellasUI() {
+
+            const stars = document.querySelectorAll("#starRating i");
+            const input = document.getElementById("Puntuacion");
+
+            if (!stars.length) return;
+
+            stars.forEach(s => {
+                s.classList.remove("bi-star-fill", "text-warning");
+                s.classList.add("bi-star");
+            });
+
+            if (input) input.value = "";
+
+        }
+
+        function generarEstrellasHTML(valor) {
+            let html = '';
+            for (let i = 1; i <= 5; i++) {
+                html += i <= valor
+                    ? '<i class="bi bi-star-fill text-warning"></i>'
+                    : '<i class="bi bi-star text-warning"></i>';
+            }
+            return html;
+        }
+
+        function actualizarEstrellasPromedio(promedio) {
+
+            const contenedor = document.getElementById("estrellasPromedio");
+            if (!contenedor) return;
+
+            let html = '';
+
+            for (let i = 1; i <= 5; i++) {
+
+                if (i <= Math.floor(promedio)) {
+                    html += '<i class="bi bi-star-fill text-warning"></i>';
+                }
+                else if (i - promedio < 1 && i - promedio > 0) {
+                    html += '<i class="bi bi-star-half text-warning"></i>';
+                }
+                else {
+                    html += '<i class="bi bi-star text-warning"></i>';
+                }
+            }
+
+            contenedor.innerHTML = html;
+        }
+
+    </script>
+}

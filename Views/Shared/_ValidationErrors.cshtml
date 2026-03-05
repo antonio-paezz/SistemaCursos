@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h6 class="fw-bold mb-2">Se encontraron errores:</h6>
+        <ul class="mb-0 list-unstyled">
+            @foreach (var modelState in ViewData.ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            }
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+    

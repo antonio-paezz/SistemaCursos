@@ -1,0 +1,358 @@
+﻿@model SistemaDeCursos.ViewModels.CursoViewModel
+
+<h5 class="mt-3">Reseñas</h5>
+<div class="card shadow-sm mt-2 mb-3">
+    <div class="card-body">
+
+        <div class="d-flex align-items-center">
+
+            <h3 id="promedioCurso">@Model.Promedio</h3>
+
+
+            <div id="estrellasPromedio">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= Math.Floor(Model.Promedio))
+                    {
+                        <i class="bi bi-star-fill text-warning"></i>
+                    }
+                    else if (i - Model.Promedio < 1 && i - Model.Promedio > 0)
+                    {
+                        <i class="bi bi-star-half text-warning"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-star text-warning"></i>
+                    }
+                }
+            </div>
+        
+
+        </div>
+
+        <small id="totalResenas" class="text-muted">
+            @Model.TotalResenas reseñas
+        </small>
+
+    </div>
+</div>
+
+<div id="listaResenas">
+    @if (Model.Calificaciones.Any())
+    {
+        @foreach (var r in Model.Calificaciones
+                                .OrderByDescending(c => c.Fecha))
+        {
+            <div class="card mb-3 shadow-sm" id="resena-@r.Id">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+                        <strong>@r.Usuario.UserName</strong>
+                        <small class="text-muted">
+                            @r.Fecha.ToString("dd/MM/yyyy")
+                        </small>
+                    </div>
+
+                    <div class="mb-2">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= r.Puntuacion)
+                            {
+                                <i class="bi bi-star-fill text-warning"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-star text-warning"></i>
+                            }
+                        }
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(r.Comentario))
+                    {
+                        <p class="mb-0">@r.Comentario</p>
+                    }
+
+                    @if (r.Usuario.UserName == User.Identity?.Name)
+                    {
+                        <button class="btn btn-sm btn-outline-primary btnEditar"
+                                data-id="@r.Id"
+                                data-puntuacion="@r.Puntuacion"
+                                data-comentario="@r.Comentario">
+                            Editar
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger btnEliminar"
+                                data-id="@r.Id">
+                            Eliminar
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditar" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Editar reseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="hidden" id="editarId">
+
+                <div id="editarStarRating" class="mb-3">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <i class="bi bi-star fs-4 text-warning"
+                           data-value="@i"
+                           style="cursor:pointer"></i>
+                    }
+                </div>
+
+                <input type="hidden" id="editarPuntuacion">
+
+                <textarea id="editarComentario"
+                          class="form-control"
+                          maxlength="150">
+                </textarea>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="btnGuardarEdicion">
+                    Guardar cambios
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Confirmar eliminación</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar la reseña?
+            </div>
+
+            <div class="modal-footer">
+                <form id="formEliminar">
+
+                    <!-- 🔥 Nuevo hidden -->
+                    <input type="hidden" id="eliminarId" />
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Eliminar
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Script Editar -->
+<script>
+    document.addEventListener("click", function (e) {
+
+        if (e.target.classList.contains("btnEditar")) {
+
+            const id = e.target.dataset.id;
+            const puntuacion = e.target.dataset.puntuacion;
+            const comentario = e.target.dataset.comentario;
+
+            document.getElementById("editarId").value = id;
+            document.getElementById("editarComentario").value = comentario;
+            document.getElementById("editarPuntuacion").value = puntuacion;
+
+            pintarEstrellasEditar(puntuacion);
+
+            new bootstrap.Modal(document.getElementById("modalEditar")).show();
+        }
+
+        document.getElementById("btnGuardarEdicion")
+            .addEventListener("click", function () {
+
+                const id = document.getElementById("editarId").value;
+                const puntuacion = document.getElementById("editarPuntuacion").value;
+                const comentario = document.getElementById("editarComentario").value;
+
+                fetch('/Calificacion/Editar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        Id: id,
+                        Puntuacion: puntuacion,
+                        Comentario: comentario
+                    })
+                })
+                    .then(r => r.json())
+                    .then(data => {
+
+                        if (!data.success) return;
+
+                        actualizarEstrellasPromedio(data.promedio);
+                        document.getElementById("promedioCurso").innerText = data.promedio;
+
+                        const contenedor = document.getElementById("resena-" + id);
+
+                        const estrellasHTML = generarEstrellasHTML(data.reseñaActualizada.puntuacion);
+
+                        contenedor.querySelector(".mb-2").innerHTML = estrellasHTML;
+
+                        const comentarioExistente = contenedor.querySelector("p");
+
+                        if (data.reseñaActualizada.comentario) {
+
+                            if (comentarioExistente) {
+                                comentarioExistente.innerText =
+                                    data.reseñaActualizada.comentario;
+                            } else {
+                                contenedor.querySelector(".card-body")
+                                    .insertAdjacentHTML(
+                                        "beforeend",
+                                        `<p class="mb-0">${data.reseñaActualizada.comentario}</p>`
+                                    );
+                            }
+
+                        } else {
+                            
+                            if (comentarioExistente) {
+                                comentarioExistente.remove();
+                            }
+                        }
+
+
+                        const botonEditar = contenedor.querySelector(".btnEditar");
+
+                        botonEditar.dataset.puntuacion =
+                            data.reseñaActualizada.puntuacion;
+
+                        botonEditar.dataset.comentario =
+                            data.reseñaActualizada.comentario;
+
+
+
+                        bootstrap.Modal.getInstance(
+                            document.getElementById("modalEditar")
+                        ).hide();
+
+                    });
+
+            });
+
+    });
+
+    function pintarEstrellasEditar(valor) {
+
+        const stars = document.querySelectorAll("#editarStarRating i");
+
+        stars.forEach(s => {
+
+            if (s.dataset.value <= valor) {
+                s.classList.remove("bi-star");
+                s.classList.add("bi-star-fill");
+            } else {
+                s.classList.remove("bi-star-fill");
+                s.classList.add("bi-star");
+            }
+
+            s.onclick = function () {
+                document.getElementById("editarPuntuacion").value = s.dataset.value;
+                pintarEstrellasEditar(s.dataset.value);
+            };
+
+        });
+    }
+</script>
+
+
+<!-- Script Eliminar -->
+
+<script>
+    document.addEventListener("click", function (e) {
+
+        if (e.target.classList.contains("btnEliminar")) {
+
+            const id = e.target.dataset.id;
+
+            // Guardamos el id en el hidden
+            document.getElementById("eliminarId").value = id;
+
+            // Abrimos modal
+            new bootstrap.Modal(
+                document.getElementById("confirmarEliminarModal")
+            ).show();
+        }
+
+    });
+
+    document.getElementById("formEliminar")
+        .addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            const id = document.getElementById("eliminarId").value;
+
+            fetch('/Calificacion/Eliminar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id })
+            })
+                .then(r => r.json())
+                .then(data => {
+
+                    if (!data.success) return;
+
+                    // Eliminar del DOM
+                    const contenedor =
+                        document.getElementById("resena-" + id);
+
+                    if (contenedor)
+                        contenedor.remove();
+
+                    // Actualizar promedio
+                    document.getElementById("promedioCurso").innerText =
+                        data.promedio;
+
+                    document.getElementById("totalResenas").innerText =
+                        data.totalResenas + " reseñas";
+
+                    actualizarEstrellasPromedio(data.promedio);
+
+                    // Cerrar modal
+                    bootstrap.Modal.getInstance(
+                        document.getElementById("confirmarEliminarModal")
+                    ).hide();
+
+                });
+
+        });
+</script>

@@ -1,0 +1,122 @@
+﻿@using SistemaDeCursos.Models
+@model List<Curso>
+
+
+<div class="m-auto mb-5 w-75">
+	<a asp-action="VistaCrear" class="btn btn-primary mt-3 mb-3">Agregar Curso</a>
+
+	<table id="tablaInscripciones" class="table table-bordered table-striped" style="width:100%">
+
+		<thead>
+			<tr>
+				<th>Título</th>
+				<th>Instructor</th>
+				<th>Categoria</th>
+				<th>Estado</th>
+				<th>Operaciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Titulo</td>
+					<td>@item.Instructor.Nombre</td>
+					<td>@item.Categoria.Nombre</td>
+					<td class="d-flex">
+						<select class="form-control form-control-sm estado-select me-2"
+								data-id="@item.Id">
+							<option value="1" selected="@(item.Estado == 1)">Activa</option>
+							<option value="2" selected="@(item.Estado == 2)">Revocada</option>
+							<option value="3" selected="@(item.Estado == 3)">Suspendida</option>
+						</select>
+						<button class="btn btn-primary btn-sm guardar-estado"
+								data-id="@item.Id">
+							Guardar
+						</button>
+					</td>
+					<td>
+						<a asp-controller="Curso" asp-action="VistaEditar" asp-route-id="@item.Id" class="btn btn-secondary">Editar</a>
+						<button type="button" class="btn btn-danger" data-toggle="modal"
+								data-target="#confirmarEliminarModal"
+								onclick="setEliminarAction('@Url.Action("Eliminar", "Curso", new {area="Admin", id = item.Id })')">
+							<i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+						</button>
+					</td>
+
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</div>
+
+
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white">
+				<h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+				¿Estás seguro de que deseas eliminar este curso?
+			</div>
+			<div class="modal-footer">
+				<form id="formEliminar" method="post">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+
+	<script>
+		function setEliminarAction(actionUrl) {
+			console.log(actionUrl);
+			document.getElementById('formEliminar').action = actionUrl;
+		}
+
+
+		$(function () {
+			$('#tablaInscripciones').DataTable({
+				autoWidth: false,
+				responsive: false,
+				language: {
+					url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+				}
+			});
+		});
+	</script>
+
+	<script>
+		$(document).on("click", ".guardar-estado", function () {
+
+			var id = $(this).data("id");
+
+			var estado = $(this)
+				.closest("tr")
+				.find(".estado-select")
+				.val();
+
+			$.ajax({
+				url: '/Admin/Inscripcion/CambiarEstado',
+				type: 'POST',
+				data: {
+					id: id,
+					estado: estado
+				},
+				success: function () {
+					alert("Estado actualizado correctamente");
+				},
+				error: function () {
+					alert("Error al actualizar");
+				}
+			});
+		});
+	</script>
+}

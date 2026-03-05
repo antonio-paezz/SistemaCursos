@@ -1,0 +1,168 @@
+﻿@model SistemaDeCursos.ViewModels.CarritoPaginaViewModel
+
+<div class="container py-5">
+
+    <h2 class="fw-bold mb-4">🛒 Mi Carrito</h2>
+
+    @if (!Model.Items.Any())
+    {
+        <div class="text-center py-5">
+            <h5 class="text-muted">Tu carrito está vacío</h5>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+
+            <!-- LISTADO -->
+            <div class="col-lg-8">
+
+                @foreach (var item in Model.Items)
+                {
+                    <div class="card mb-3 shadow-sm border-0 rounded-4">
+                        <div class="row g-0 align-items-center p-3">
+
+                            <div class="col-md-2">
+                                <img src="@item.ImagenUrl"
+                                     class="img-fluid rounded-3"
+                                     style="height:80px; object-fit:cover;" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <h6 class="fw-semibold mb-1">@item.Titulo</h6>
+                                <small class="text-muted">
+                                    Precio unitario: $@item.Precio
+                                </small>
+                            </div>
+
+                            <div class="col-md-2 text-center">
+                                <span class="badge bg-secondary">
+                                    x @item.Cantidad
+                                </span>
+                            </div>
+
+                            <div class="col-md-2 text-end fw-bold">
+                                $@item.Subtotal
+                            </div>
+
+                            <div class="col-md-2 text-end">
+                                <a asp-action="Eliminar"
+                                   asp-route-CarritoProductoId="@item.CarritoProductoId"
+                                   class="btn btn-sm btn-outline-danger rounded-pill">
+                                    Eliminar
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- RESUMEN -->
+            <div class="col-lg-4">
+
+                <div class="card shadow-lg border-0 rounded-4 p-4 sticky-top" style="top:100px;">
+
+                    <h5 class="fw-bold mb-3">Resumen</h5>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span>$@Model.Total</span>
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between mb-3 fs-5 fw-bold">
+                        <span>Total</span>
+                        <span>$@Model.Total</span>
+                    </div>
+
+                    <button class="btn btn-dark w-100 rounded-pill"
+                            data-bs-toggle="modal"
+                            data-bs-target="#detalleCompraModal">
+                        Confirmar compra
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="detalleCompraModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 rounded-4 shadow">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Confirmar Compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                @foreach (var item in Model.Items)
+                {
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>@item.Titulo</span>
+                        <span>$@item.Subtotal</span>
+                    </div>
+                }
+
+                <hr />
+
+                <div class="d-flex justify-content-between fw-bold fs-5">
+                    <span>Total</span>
+                    <span>$@Model.Total</span>
+                </div>
+
+            </div>
+
+            <div class="modal-footer border-0">
+                <button class="btn btn-outline-secondary rounded-pill"
+                        data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <a class="btn btn-success rounded-pill px-4"
+                   asp-action="ConfirmarCompra"
+                   asp-route-total="@Model.Total">
+                    Pagar ahora
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Estilos del modal moderno -->
+<style>
+    .modern-modal {
+        border-radius: 18px !important;
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .modal-content {
+        animation: modalFadeIn 0.25s ease-out;
+    }
+
+    
+
+    .modal-header .btn-close {
+        filter: brightness(0) invert(0.5);
+    }
+
+    /* Opcional: sombras más suaves */
+    .shadow-lg {
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+    }
+</style>

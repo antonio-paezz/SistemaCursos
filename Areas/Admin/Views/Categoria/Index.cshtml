@@ -1,0 +1,96 @@
+﻿@using SistemaDeCursos.Models
+@model List<Categoria>
+
+
+<div class="m-auto mb-5 w-75">
+	<a asp-action="VistaCrear" class="btn btn-primary mt-3 mb-3">Agregar Categoría</a>
+
+	<table id="tablaInscripciones" class="table table-bordered table-striped" style="width:100%">
+
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Operaciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Nombre</td>
+					<td>@item.Descripcion</td>
+					<td>
+						<div class="d-flex justify-content-center">
+							<a asp-controller="Categoria" asp-action="VistaEditar" asp-route-id="@item.Id" class="btn btn-sm btn-warning mr-2">Editar</a>
+							<button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+									data-target="#confirmarEliminarModal"
+									onclick="setEliminarAction('@Url.Action("Eliminar", "Categoria", new {area="Admin", id = item.Id })')">
+								<i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+							</button>
+						</div>
+					</td>
+
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</div>
+
+
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white">
+				<h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+				¿Estás seguro de que deseas eliminar esta categoría?
+			</div>
+			<div class="modal-footer">
+				<form id="formEliminar" method="post">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+
+	<script>
+		function setEliminarAction(actionUrl) {
+			document.getElementById('formEliminar').action = actionUrl;
+		}
+
+
+		$(function () {
+			$('#tablaInscripciones').DataTable({
+				autoWidth: false,
+				responsive: false,
+				language: {
+					url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+				},
+				columnDefs: [
+					{
+						targets: 1,          // columna descripción
+						width: "60%"
+					},
+					{
+						targets: 2,          // columna acciones
+						orderable: false,
+						searchable: false,
+						className: "text-nowrap"
+					}
+				]
+
+			});
+		});
+	</script>
+
+	
+}

@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.bg-claro{
+    background-color: #ffffff !important;
+}
+
+.bg-sidebar {
+    background-color: #004aad;
+}
+
+.txt-claro {
+    color: #ffffff !important; 
+}
+
+.dataTables_wrapper {
+    width: 100%;
+}
+
+table.dataTable {
+    width: 100% !important;
+}

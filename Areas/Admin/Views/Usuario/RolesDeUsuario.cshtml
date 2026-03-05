@@ -1,0 +1,90 @@
+﻿@model SistemaDeCursos.Areas.Admin.ViewModels.RolesDeUsuarioViewModel;
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="container w-75">
+	<button onclick="toggleDropdown()" class="btn btn-primary mt-5">Agregar Rol</button>
+
+
+	<form asp-action="AsignarRol" method="post" id="miDropdown" style="display: none;">
+		<input type="hidden" asp-for="UsuarioId" />
+		<select asp-for="@Model.RolName" required class="form-select mt-2">
+			<option selected disabled>-- Seleccione Rol --</option>
+			@foreach (var rol in Model.Roles)
+			{
+				<option value="@rol.Name">@rol.Name</option>
+			}
+		</select>
+
+		<button type="submit" class="btn btn-primary mt-2">Enviar</button> <!-- Botón válido -->
+	</form>
+
+	<table class="table table-bordered table-hover" width="100%">
+		<thead class="table-dark">
+			<tr>
+				<th>
+					Rol
+				</th>
+				<th width="25%">Operaciones</th>
+			</tr>
+		</thead>
+		<tbody class="table-active">
+			@foreach (var rol in Model.RolesDeUsuario)
+			{
+				<tr>
+					<td>
+
+						@Html.DisplayFor(r => rol)
+
+					</td>
+
+					<td>
+						<button type="button" class="btn btn-danger" data-toggle="modal"
+								data-target="#confirmarEliminarModal"
+								onclick="setEliminarAction('@Url.Action("QuitarRol", "Usuario", new { userId = Model.UsuarioId, rolName = rol })')">
+							<i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+						</button>
+
+
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</div>
+
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-danger text-white">
+				<h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+				¿Estás seguro de que deseas quitar el rol @Model.RolName a este usuario?
+			</div>
+			<div class="modal-footer">
+				<form id="formEliminar" method="post">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	function setEliminarAction(actionUrl) {
+		document.getElementById('formEliminar').action = actionUrl;
+	}
+</script>
+<script>
+	function toggleDropdown() {
+		const dropdown = document.getElementById("miDropdown");
+		dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+	}
+</script>
+
+

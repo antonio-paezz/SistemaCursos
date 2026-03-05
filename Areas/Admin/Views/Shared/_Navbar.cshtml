@@ -1,0 +1,167 @@
+﻿ <!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <!-- Explorar -->
+        <li class="nav-item">
+            <a class="nav-link"
+               asp-area=""
+               asp-controller="Home"
+               asp-action="Index">
+                Explorar
+            </a>
+        </li>
+
+        <!-- Categorías -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+               href="#" role="button"
+               data-toggle="dropdown">
+                Categorías
+            </a>
+            <ul class="dropdown-menu">
+                @await Component.InvokeAsync("Categorias")
+            </ul>
+        </li>
+
+        @if (User.IsInRole("Instructor") || User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link"
+                   asp-area=""
+                   asp-controller="Curso"
+                   asp-action="Lista">
+                    Mis Cursos
+                </a>
+            </li>
+        }
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+        <li class="nav-item">
+            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+                <form class="d-flex mx-auto w-50"
+                      method="get"
+                      asp-area=""
+                      asp-controller="Home"
+                      asp-action="Index">
+                    <div class="input-group">
+                        <input type="text"
+                               name="buscar"
+                               class="form-control"
+                               placeholder="Buscar cursos..."
+                               value="@Context.Request.Query["buscar"]" />
+                        <button class="btn btn-light" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </li>
+
+        
+        <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+        </li>
+        <!-- 🛒 CARRITO -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item me-3">
+                <a class="nav-link position-relative"
+                   asp-area=""
+                   asp-controller="Carrito"
+                   asp-action="Carrito">
+
+                    <i class="bi bi-cart3 fs-5 text-dark"></i>
+
+                    @if (ViewBag.CantidadCarrito != null && ViewBag.CantidadCarrito > 0)
+                    {
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            @ViewBag.CantidadCarrito
+                        </span>
+                    }
+                </a>
+            </li>
+        }
+
+        <!-- 👤 USUARIO -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   href="#" role="button"
+                   data-toggle="dropdown">
+                    <i class="bi bi-person-circle text-dark"></i>
+                    @User.Identity.Name
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+
+                    <li>
+                        <a class="dropdown-item"
+                           asp-area=""
+                           asp-controller="Perfil"
+                           asp-action="Index">
+                            Mi Perfil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item"
+                           asp-area=""
+                           asp-controller="Curso"
+                           asp-action="CursosDeUsuario">
+                            Mis Compras
+                        </a>
+                    </li>
+
+                    
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item"
+                               asp-area=""
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Vista Usuario
+                            </a>
+                        </li>
+                    
+
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li>
+                        <form method="post"
+                              asp-area=""
+                              asp-controller="Login"
+                              asp-action="CerrarSesion">
+                            <button type="submit"
+                                    class="dropdown-item text-danger">
+                                Cerrar sesión
+                            </button>
+                        </form>
+                    </li>
+
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-light"
+                   asp-controller="Login"
+                   asp-action="Login">
+                    Iniciar Sesión
+                </a>
+            </li>
+        }
+        
+    </ul>
+</nav>
+<!-- /.navbar -->

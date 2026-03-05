@@ -1,0 +1,23 @@
+﻿@model SistemaDeCursos.ViewModels.LoginViewModel
+
+<div class="container mx-auto w-35 mt-5 border border-1 shadow-sm">
+	<div class="h-75 w-75 container mx-auto">
+		<img src="~/img/Logo-conectaPro.png" alt="logo" class="img-fluid"/>
+	</div>
+	<form asp-controller="Login" asp-action="IniciarSesion" class="form" method="post">
+		<partial name="_ValidationErrors" />
+	
+		<label asp-for="Email" class="form-label">Email:</label>
+		<input asp-for="Email" placeholder="Ingrese su email..." class="form-control"></input>
+		<span asp-validation-for="Email"></span>
+	
+		<label asp-for="Contraseña" class="form-label mt-3">Contraseña: </label>
+		<input asp-for="Contraseña" type="password" placeholder="Ingrese su contraseña..." class="form-control"></input>
+		<span asp-validation-for="Contraseña"></span>
+
+		<input type="submit" value="Iniciar Sesion" class="btn btn-primary mt-4 w-100"></input>
+	</form>
+	<div class="d-flex mt-2">
+		<p>¿No tienes una cuenta?</p> <a asp-action="Registration" asp-controller="Registration">Registrate</a>
+	</div>
+</div>

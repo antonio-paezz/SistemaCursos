@@ -1,0 +1,49 @@
+﻿@using SistemaDeCursos.Areas.Admin.ViewModels
+@model AgregarUsuarioViewModel
+
+<div class="container w-50 card mt-5">
+	<form method="post" asp-action="Agregar" class="form mt-3">
+
+		<label clas="form-label mt-1" asp-for="Nombre">Nombre:</label>
+		<input class="form-control" asp-for="Nombre"></input>
+		<span asp-validation-for="Nombre" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Apellido">Apellido:</label>
+		<input class="form-control" asp-for="Apellido"></input>
+		<span asp-validation-for="Apellido" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="UserName">Nombre de Usuario:</label>
+		<input class="form-control" asp-for="UserName"></input>
+		<span asp-validation-for="UserName" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Email">Email:</label>
+		<input class="form-control" asp-for="Email"></input>
+		<span asp-validation-for="Email" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Contraseña">Contraseña:</label>
+		<input class="form-control" asp-for="Contraseña"></input>
+		<span asp-validation-for="Contraseña" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="ConfirmarContraseña">Confirmar contraseña:</label>
+		<input class="form-control" asp-for="ConfirmarContraseña"></input>
+		<span asp-validation-for="ConfirmarContraseña" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Pais">País:</label>
+		<input class="form-control" asp-for="Pais"></input>
+		<span asp-validation-for="Pais" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Provincia">Provincia:</label>
+		<input class="form-control" asp-for="Provincia"></input>
+		<span asp-validation-for="Provincia" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Ciudad">Ciudad:</label>
+		<input class="form-control" asp-for="Ciudad"></input>
+		<span asp-validation-for="Ciudad" class="text-danger d-block"></span>
+
+		<div class="d-flex g-2 mt-3 mb-3">
+			<input class="btn btn-primary" type="submit" value="Guardar" />
+			<a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+		</div>
+
+	</form>
+</div>

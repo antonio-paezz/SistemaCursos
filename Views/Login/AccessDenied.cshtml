@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Acceso denegado";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+
+            <div class="card shadow-lg border-0 text-center">
+                <div class="card-body p-5">
+
+                    <!-- Icono -->
+                    <div class="mb-4">
+                        <div class="rounded-circle bg-danger bg-opacity-10 d-inline-flex align-items-center justify-content-center"
+                             style="width:90px;height:90px;">
+                            <i class="bi bi-shield-lock-fill text-danger" style="font-size:40px;"></i>
+                        </div>
+                    </div>
+
+                    <!-- Título -->
+                    <h2 class="fw-bold mb-3 text-danger">
+                        Acceso denegado
+                    </h2>
+
+                    <!-- Mensaje -->
+                    <p class="text-muted mb-4">
+                        No tenés permisos suficientes para acceder a esta sección.
+                        Si creés que esto es un error, contactá al administrador.
+                    </p>
+
+                    <!-- Botones -->
+                    <div class="d-flex justify-content-center gap-3">
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary px-4">
+                            Volver al inicio
+                        </a>
+
+                        <a asp-controller="Contacto"
+                           asp-action="Index"
+                           class="btn btn-danger px-4">
+                            Contactar soporte
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

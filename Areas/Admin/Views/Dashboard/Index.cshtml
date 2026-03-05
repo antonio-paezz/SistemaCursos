@@ -1,0 +1,91 @@
+﻿<div class="container mt-4">
+
+    <h2 class="mb-4">Dashboard</h2>
+
+    <div class="row g-3">
+
+        <!-- Cards -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Cursos</h6>
+                    <h3>@ViewBag.TotalCursos</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Usuarios</h6>
+                    <h3>@ViewBag.TotalUsuarios</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Ventas</h6>
+                    <h3>@ViewBag.TotalVentas</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Ingresos</h6>
+                    <h3>$@ViewBag.Ingresos</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Gráfico -->
+    <div class="card shadow-sm border-0 mt-4">
+        <div class="card-body">
+            <h5>Ventas por mes</h5>
+            <canvas id="chartVentas"></canvas>
+        </div>
+    </div>
+
+    <!-- Últimos cursos -->
+    <div class="card shadow-sm border-0 mt-4">
+        <div class="card-body">
+            <h5>Últimos cursos</h5>
+            <ul class="list-group">
+                @foreach (var c in ViewBag.UltimosCursos)
+                {
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>@c.Titulo</span>
+                        <small class="text-muted">@c.FechaPublicacion.ToString("dd/MM/yyyy")</small>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ventas = @Html.Raw(Json.Serialize(ViewBag.VentasMes));
+
+    const labels = ventas.map(v => v.mes);
+    const data = ventas.map(v => v.total);
+
+    new Chart(document.getElementById('chartVentas'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Ventas',
+                data: data,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)'
+            }]
+        }
+    });
+</script>

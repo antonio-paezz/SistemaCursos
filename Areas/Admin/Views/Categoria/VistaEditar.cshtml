@@ -1,0 +1,22 @@
+﻿@using SistemaDeCursos.Areas.Admin.ViewModels
+@model EditarCategoriaViewModel
+
+<div class="container w-50 card mt-5">
+	<form method="post" asp-action="Editar" class="form mt-3">
+		<input type="hidden" asp-for="Id"></input>
+
+		<label clas="form-label mt-1" asp-for="Nombre">Nombre:</label>
+		<input class="form-control" asp-for="Nombre"></input>
+		<span asp-validation-for="Descripcion" class="text-danger d-block"></span>
+
+		<label class="form-label mt-1" asp-for="Descripcion">Descripción:</label>
+		<input class="form-control" asp-for="Descripcion"></input>
+		<span asp-validation-for="Descripcion" class="text-danger d-block"></span>
+
+		<div class="d-flex g-2 mt-3 mb-3">
+			<input class="btn btn-primary" type="submit" value="Guardar" />
+			<a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+		</div>
+
+	</form>
+</div>

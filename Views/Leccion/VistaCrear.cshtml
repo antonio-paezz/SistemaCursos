@@ -1,0 +1,61 @@
+﻿@model SistemaDeCursos.Models.Leccion
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0 text-center">Crear nueva lección</h5>
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="Crear" method="post">
+
+                        <input asp-for="CursoId" type="hidden" />
+
+                        <!-- Título -->
+                        <div class="mb-3">
+                            <label asp-for="Titulo" class="form-label fw-semibold"></label>
+                            <input asp-for="Titulo"
+                                   class="form-control"
+                                   placeholder="Ingrese el título de la lección" />
+                            <span asp-validation-for="Titulo" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="mb-3">
+                            <label asp-for="Descripcion" class="form-label fw-semibold"></label>
+                            <textarea asp-for="Descripcion"
+                                      rows="4"
+                                      class="form-control"
+                                      placeholder="Describa el contenido de la lección">
+                            </textarea>
+                            <span asp-validation-for="Descripcion" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a onclick="history.back()"
+                               class="btn btn-outline-secondary">
+                                Cancelar
+                            </a>
+
+                            <button type="submit" class="btn btn-success">
+                                Crear lección
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

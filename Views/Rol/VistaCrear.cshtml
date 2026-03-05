@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+
+<h2 class="titulo text-center">Crear Rol</h2>
+<div class="card container mx-auto w-50">
+	<form asp-action="Crear" method="post">
+		<label asp-for="Name" class="form-label">Nombre: </label>
+		<input asp-for="Name" placeholder="Ingrese nombre del rol..." class="form-control"></input>
+
+		<input type="submit" value="Guardar" class="btn boton-verde mt-2 mb-2"></input>
+	</form>
+</div>

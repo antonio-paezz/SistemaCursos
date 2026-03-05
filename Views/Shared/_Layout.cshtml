@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SistemaDeCursos</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SistemaDeCursos.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-azul shadow-sm">
+            <div class="container-fluid">
+
+                <!-- 🔹 LOGO -->
+                <a class="navbar-brand d-flex align-items-center"
+                   asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo-altenativo-conectaPro.png"
+                         alt="logo" height="40" class="me-2" />
+                </a>
+
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+
+                    <!-- 🔹 IZQUIERDA -->
+                    <ul class="navbar-nav me-3">
+
+                        <!-- Explorar -->
+                        <li class="nav-item">
+                            <a class="nav-link text-light"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Explorar
+                            </a>
+                        </li>
+
+                        <!-- Categorías -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light"
+                               href="#" role="button"
+                               data-bs-toggle="dropdown">
+                                Categorías
+                            </a>
+                            <ul class="dropdown-menu">
+                                @await Component.InvokeAsync("Categorias")
+                            </ul>
+                        </li>
+
+                        @if (User.IsInRole("Instructor") || User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light"
+                                   asp-controller="Curso"
+                                   asp-action="Lista">
+                                    Mis Cursos
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- 🔹 BUSCADOR CENTRADO -->
+                    <form class="d-flex mx-auto w-50"
+                          method="get"
+                          asp-controller="Home"
+                          asp-action="Index">
+                        <div class="input-group">
+                            <input type="text"
+                                   name="buscar"
+                                   class="form-control"
+                                   placeholder="Buscar cursos..."
+                                   value="@Context.Request.Query["buscar"]" />
+                            <button class="btn btn-light" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- 🔹 DERECHA -->
+                    <ul class="navbar-nav ms-auto align-items-center">
+
+                        <!-- 🛒 CARRITO -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item me-3">
+                                <a class="nav-link position-relative text-light"
+                                   asp-controller="Carrito"
+                                   asp-action="Carrito">
+
+                                    <i class="bi bi-cart3 fs-5"></i>
+
+                                    @if (ViewBag.CantidadCarrito != null && ViewBag.CantidadCarrito > 0)
+                                    {
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            @ViewBag.CantidadCarrito
+                                        </span>
+                                    }
+                                </a>
+                            </li>
+                        }
+
+                        <!-- 👤 USUARIO -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light"
+                                   href="#" role="button"
+                                   data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-circle"></i>
+                                    @User.Identity.Name
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-end">
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Perfil"
+                                           asp-action="Index">
+                                            Mi Perfil
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Curso"
+                                           asp-action="CursosDeUsuario">
+                                            Mis Compras
+                                        </a>
+                                    </li>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               asp-area="Admin"
+                                               asp-controller="Dashboard"
+                                               asp-action="Index">
+                                                Panel Admin
+                                            </a>
+                                        </li>
+                                    }
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <form method="post"
+                                              asp-controller="Login"
+                                              asp-action="CerrarSesion">
+                                            <button type="submit"
+                                                    class="dropdown-item text-danger">
+                                                Cerrar sesión
+                                            </button>
+                                        </form>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light"
+                                   asp-controller="Login"
+                                   asp-action="Login">
+                                    Iniciar Sesión
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container">
+        @await Html.PartialAsync("_ValidationSummary")
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        
+    </div>
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - SistemaDeCursos - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            timeOut: 3000
+        };
+    </script>
+
+    @await Html.PartialAsync("_Toastr")
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

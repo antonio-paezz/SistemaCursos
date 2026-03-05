@@ -1,0 +1,231 @@
+﻿@model SistemaDeCursos.Models.Leccion
+
+@{
+    string GetArchivoTipo(string mime)
+    {
+        if (mime == null) return "archivo";
+        if (mime.StartsWith("image")) return "imagen";
+        if (mime.StartsWith("video")) return "video";
+        if (mime.Contains("pdf")) return "pdf";
+        if (mime.Contains("word")) return "word";
+        if (mime.Contains("excel") || mime.Contains("spreadsheet")) return "excel";
+        if (mime.Contains("presentation")) return "ppt";
+        if (mime.StartsWith("text")) return "texto";
+        if (mime.StartsWith("audio")) return "audio";
+        if (mime.Contains("zip") || mime.Contains("rar")) return "zip";
+        return "archivo";
+    }
+
+    var cantidad = Model.Contenidos?.Count() ?? 0;
+}
+
+<div class="container py-4">
+
+    <!-- HERO -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-start flex-wrap">
+
+                <div>
+                    <h2 class="fw-bold">@Model.Titulo</h2>
+                    <p class="text-muted mb-0">@Model.Descripcion</p>
+                </div>
+
+                <div class="text-end d-flex flex-column gap-2">
+                    <span class="badge bg-dark">
+                        @cantidad contenido(s)
+                    </span>
+                    <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- CONTENIDO -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h4 class="fw-bold mb-0">Contenido de la lección</h4>
+
+            <a asp-action="VistaAgregar"
+               asp-controller="Contenido"
+               asp-route-id="@Model.Id"
+               class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i>
+                Agregar contenido
+            </a>
+        </div>
+
+        <div class="card-body">
+
+            @if (cantidad == 0)
+            {
+                <!-- ESTADO VACÍO -->
+                <div class="text-center py-5">
+
+                    <i class="bi bi-folder2-open display-4 text-primary mb-3"></i>
+
+                    <h5 class="fw-bold">Esta lección todavía no tiene contenido</h5>
+
+                    <p class="text-muted">
+                        Agregá videos, archivos, textos o recursos descargables.
+                    </p>
+
+                    <a asp-action="VistaAgregar"
+                       asp-controller="Contenido"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-primary mt-2">
+                        Crear primer contenido
+                    </a>
+
+                </div>
+            }
+            else
+            {
+                <div class="row g-4">
+
+                    @foreach (var c in Model.Contenidos)
+                    {
+                        var tipo = GetArchivoTipo(c.Tipo);
+
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-4">
+
+                                <div class="card-body">
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                        <div>
+                                            <span class="badge bg-secondary text-uppercase">
+                                                @tipo
+                                            </span>
+                                        </div>
+
+                                        <button type="button"
+                                                class="btn btn-sm btn-outline-danger"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirmarEliminarModal"
+                                                onclick="setEliminarAction('@Url.Action("EliminarContenido", "Contenido", new { id = c.Id })')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+
+                                    </div>
+
+                                    @switch (tipo)
+                                    {
+                                        case "texto":
+                                            <p class="mb-0">@c.Texto</p>
+                                            break;
+
+                                        case "imagen":
+                                            <img src="@Url.Content(c.UrlArchivo)" class="img-fluid rounded" />
+                                            break;
+
+                                        case "video":
+                                            <div class="ratio ratio-16x9">
+                                                <video controls>
+                                                    <source src="@c.UrlArchivo">
+                                                </video>
+                                            </div>
+                                            break;
+
+                                        case "pdf":
+                                            <a href="@c.UrlArchivo" target="_blank" class="btn btn-outline-primary">
+                                                Ver PDF
+                                            </a>
+                                            break;
+
+                                        case "word":
+                                            <a href="@c.UrlArchivo" target="_blank" class="btn btn-outline-secondary">
+                                                Abrir Word
+                                            </a>
+                                            break;
+
+                                        case "excel":
+                                            <a href="@c.UrlArchivo" target="_blank" class="btn btn-outline-success">
+                                                Abrir Excel
+                                            </a>
+                                            break;
+
+                                        case "ppt":
+                                            <a href="@c.UrlArchivo" target="_blank" class="btn btn-warning">
+                                                Abrir PowerPoint
+                                            </a>
+                                            break;
+
+                                        case "zip":
+                                            <a href="@c.UrlArchivo" download class="btn btn-dark">
+                                                Descargar archivo
+                                            </a>
+                                            break;
+
+                                        default:
+                                            <a href="@c.UrlArchivo" download class="btn btn-secondary">
+                                                Descargar archivo
+                                            </a>
+                                            break;
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL ELIMINAR -->
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-4">
+
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    Confirmar eliminación
+                </h5>
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Esta acción no se puede deshacer.
+                ¿Seguro que querés eliminar este contenido?
+            </div>
+
+            <div class="modal-footer">
+                <form id="formEliminar" method="post">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Eliminar definitivamente
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function setEliminarAction(actionUrl) {
+        document.getElementById('formEliminar').action = actionUrl;
+    }
+</script>
