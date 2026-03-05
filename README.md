@@ -91,6 +91,6 @@ Repositorio
 
 Proyecto gestionado en GitHub.
 
-Autor
+Autor: Antonio Paez Vangel
 
 Proyecto desarrollado como trabajo académico, simulando un escenario de producción real para demostrar buenas prácticas en desarrollo web.
