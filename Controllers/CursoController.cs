@@ -160,7 +160,8 @@ namespace SistemaDeCursos.Controllers
 				Precio = curso.Precio,
 				FechaPublicacion = curso.FechaPublicacion,
                 ImagenUrl = curso.ImagenUrl,
-                Categorias = categorias
+                Categorias = categorias,
+                Estado = curso.Estado
 			};
             
             return View(cursovm);
@@ -197,6 +198,7 @@ namespace SistemaDeCursos.Controllers
 				curso.ResourceType = result.Tipo;
 				curso.FechaPublicacion = DateOnly.FromDateTime(DateTime.Now);
 				curso.CategoriaId = viewmodel.CategoriaId;
+                curso.Estado = viewmodel.Estado;
             }
             else
             {
@@ -206,6 +208,7 @@ namespace SistemaDeCursos.Controllers
 				curso.Precio = viewmodel.Precio;
 				curso.FechaPublicacion = DateOnly.FromDateTime(DateTime.Now);
 				curso.CategoriaId = viewmodel.CategoriaId;
+                curso.Estado = viewmodel.Estado;
 			}
 
 

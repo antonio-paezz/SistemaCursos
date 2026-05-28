@@ -33,10 +33,10 @@ namespace SistemaDeCursos.ViewModels
         public IEnumerable<Leccion> Lecciones { get; set; }
         public Leccion? LeccionActual { get; set; }
 
-        // 🔹 Calificaciones
+        // Calificaciones
         public IEnumerable<Calificacion> Calificaciones { get; set; } = new List<Calificacion>();
 
-        // 🔹 Datos calculados (PRO)
+        // Datos calculados 
         public double Promedio =>
             Calificaciones.Any()
                 ? Math.Round(Calificaciones.Average(c => c.Puntuacion), 1)

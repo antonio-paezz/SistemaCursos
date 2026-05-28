@@ -260,3 +260,4 @@ C:\Users\antop\source\repos\SistemaDeCursos\SistemaDeCursos\obj\Debug\net8.0\ref
 C:\Users\antop\source\repos\SistemaDeCursos\SistemaDeCursos\obj\Debug\net8.0\SistemaDeCursos.pdb
 C:\Users\antop\source\repos\SistemaDeCursos\SistemaDeCursos\obj\Debug\net8.0\SistemaDeCursos.genruntimeconfig.cache
 C:\Users\antop\source\repos\SistemaDeCursos\SistemaDeCursos\obj\Debug\net8.0\ref\SistemaDeCursos.dll
+C:\Users\antop\source\repos\SistemaDeCursos\SistemaDeCursos\obj\Debug\net8.0\SistemaDeCursos.sourcelink.json

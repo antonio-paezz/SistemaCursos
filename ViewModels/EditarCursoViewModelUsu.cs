@@ -28,6 +28,8 @@ namespace SistemaDeCursos.ViewModels
 		public int CategoriaId { get; set; }
 		public IEnumerable<Categoria>? Categorias { get; set; }
 
+		public int Estado { get; set; }
+
 		public IFormFile? Archivo { get; set; }
 	}
 }

@@ -234,6 +234,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXFJlZ2lzdHJhdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/RestablecerContrasenia/VistaCambiarContrasenia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdGFibGVjZXJDb250cmFzZW5pYVxWaXN0YUNhbWJpYXJDb250cmFzZW5pYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/RestablecerContrasenia/_PartialContrasenia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdGFibGVjZXJDb250cmFzZW5pYVxfUGFydGlhbENvbnRyYXNlbmlhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/antop/source/repos/SistemaDeCursos/SistemaDeCursos/Views/Rol/Lista.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXExpc3RhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

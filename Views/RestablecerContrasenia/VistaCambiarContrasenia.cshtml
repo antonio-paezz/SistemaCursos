@@ -1,0 +1,19 @@
+﻿@model SistemaDeCursos.ViewModels.RestablecerContraseniaViewModel;
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+<h1 class="text-primary mt-5">Restablecer contraseña</h1>
+<h2 class="text-secondary">Ingrese Email</h2>
+
+<div class="w-50">
+	<form asp-action="ConfirmarEmail" method="post">
+		<label asp-for="Email" class="form-label">Email:</label>
+		<input asp-for="Email" placeholder="Ingrese su email..." class="form-control" />
+
+		<input type="submit" value="Enviar" class="btn btn-primary mt-2"></input>
+	</form>
+</div>
+
+
+

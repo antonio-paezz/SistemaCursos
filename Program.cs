@@ -42,13 +42,13 @@ namespace SistemaDeCursos
 			{
 				options.SignIn.RequireConfirmedAccount = false;
 			})
-            .AddRoles<IdentityRole>()  // si vas a usar roles (recomendado)
+            .AddRoles<IdentityRole>()  
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Login/Login";
-                options.AccessDeniedPath = "/Login/AccessDenied"; // opcional
+                options.AccessDeniedPath = "/Login/AccessDenied"; 
             });
 
             builder.Services.Configure<CloudinarySettings>(
