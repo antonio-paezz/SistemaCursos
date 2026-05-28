@@ -66,30 +66,81 @@ El sistema está diseñado bajo arquitectura MVC y buenas prácticas de desarrol
 
 ### 1️⃣ Clonar el repositorio
 
+### 1️⃣ Clonar el repositorio
+
 ```bash
 git clone URL_DEL_REPO
-2️⃣ Configurar base de datos
+```
+
+### 2️⃣ Configurar base de datos
 
 En appsettings.json, configurar la connection string:
 
+```json
 "ConnectionStrings": {
   "DefaultConnection": "Server=TU_SERVER;Database=TU_DB;User Id=USUARIO;Password=PASS;TrustServerCertificate=True;"
 }
+```
 
 Si se despliega en producción (por ejemplo en hosting), utilizar la cadena correspondiente del entorno.
 
-3️⃣ Aplicar migraciones (si es necesario)
+### 3️⃣ Aplicar migraciones (si es necesario)
+
+```bash
 dotnet ef database update
-4️⃣ Ejecutar el proyecto
+```
+
+### 4️⃣ Ejecutar el proyecto
+
+```bash
 dotnet run
+```
 
 Luego acceder en el navegador:
 
+```text
 https://localhost:5001
+```
 
-Repositorio
+## Capturas de pantalla
 
-Proyecto gestionado en GitHub.
+### Inicio
+
+![Inicio](screenshots/Inicio.png)
+
+### Perfil de usuario
+
+![Perfil](screenshots/perfil.png)
+
+### Mis cursos
+
+![MisCursos](screenshots/MisCursos.png)
+
+### Curso y lecciones
+
+![CursoLecciones](screenshots/CursoLecciones.png)
+
+### Contenido de lección
+
+![LeccionContenido](screenshots/LeccionContenido.png)
+
+### Edición de cursos
+
+![EditarCurso](screenshots/EditarCurso.png)
+
+### Carrito de compras
+
+![Carrito](screenshots/Carrito.png)
+
+### Panel administrativo
+
+![PanelAdmin](screenshots/PanelAdmin.png)
+
+### Gestión de usuarios
+
+![ManejoDeUsuario](screenshots/ManejoDeUsuario.png)
+
+### Proyecto gestionado en GitHub.
 
 Autor: Antonio Paez Vangel
 
